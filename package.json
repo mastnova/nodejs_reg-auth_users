@@ -1,0 +1,24 @@
+{
+  "name": "reg-auth",
+  "version": "1.0.0",
+  "description": "learning",
+  "main": "server.js",
+  "dependencies": {
+    "ejs": "^2.4.1",
+    "ejs-locals": "^1.0.2",
+    "express": "^3.5.0",
+    "mongodb": "^2.1.11",
+    "mongoose": "^4.4.10",
+    "nconf": "^0.8.4",
+    "request": "^2.69.0",
+    "socket.io": "^1.4.5"
+  },
+  "devDependencies": {
+    "winston": "^2.2.0"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "mastnova",
+  "license": "ISC"
+}

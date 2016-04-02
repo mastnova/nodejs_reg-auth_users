@@ -1,0 +1,16 @@
+{
+	"port": "8080",
+	"app-view": "app/views",
+	"view-engine": "ejs",
+	"app-static": "app/public",
+	"db-host": "mongodb://127.0.0.1:27017/site",
+	"session": {
+		"secret": "MySecretWord",
+		"key": "NODESESSID",
+		"cookie": {
+			"path": "/",
+			"maxAge": null,
+			"httpOnly": true
+		}
+	}
+}
