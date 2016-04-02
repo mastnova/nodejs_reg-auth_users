@@ -14,7 +14,7 @@ module.exports = function (server) {
 		}
 	});
 
-	server.get('/login', function (req, res) {
+	server.get('/login', function (req, res, next) {
 		res.render('login', {title: 'Login'});
 	});
 
@@ -38,11 +38,28 @@ module.exports = function (server) {
 		});
 	});
 
+	server.get('/register', function (req, res, next) {
+		res.render('register', {title: 'Register'});
+	});
 
-// var admin = new User.model({name: 'root3', password: 'pass1@'});
-// admin.save(function (err) {
-// 	if (err) console.log('ERROR');
-// });
+	server.post('/register', function (req, res, next) {
+		let login = req.body.login;
+		let password = req.body.password;
+		let location;
+		new User({name: login, password: password})
+			.save(function (error, user) {
+				if (error) {
+					location = '/register';
+				}
+				else {
+					req.session.user = user._id;
+					location = '/';
+				}
+				res.status(302);
+				res.setHeader('Location', location);
+				res.end();
+			});
+	});
 
 	//catch 404
 	server.use(function (req, res, next) {
