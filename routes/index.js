@@ -61,6 +61,13 @@ module.exports = function (server) {
 			});
 	});
 
+	server.get('/logout', (req, res, next) => {
+		req.session.user = '';
+		res.status(302);
+		res.setHeader('Location', '/');
+		res.end();
+	});
+
 	//catch 404
 	server.use(function (req, res, next) {
 		res.render('error', {title: 'ошибка', status: 404, message: 'not found!'});
