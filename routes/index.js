@@ -7,15 +7,15 @@ module.exports = function (server) {
 		if (req.session.user) {
 			User.findById(req.session.user, function (err, user) {
 				if (err) next(err);
-				res.render("index", {title: 'наш айт', name:  user.name});
+				res.render("index", {title: 'наш айт', name:  user.name, auth: true});
 			})
 		} else {
-			res.render("index", {title: 'наш айт', name:  'гость'});
+			res.render("index", {title: 'наш айт', name:  'гость', auth: false});
 		}
 	});
 
 	server.get('/login', function (req, res, next) {
-		res.render('login', {title: 'Login'});
+		res.render('login', {title: 'Login', auth: false});
 	});
 
 	server.post('/login', function (req, res, next) {
@@ -39,7 +39,7 @@ module.exports = function (server) {
 	});
 
 	server.get('/register', function (req, res, next) {
-		res.render('register', {title: 'Register'});
+		res.render('register', {title: 'Register', auth: false});
 	});
 
 	server.post('/register', function (req, res, next) {
@@ -70,6 +70,12 @@ module.exports = function (server) {
 
 	//catch 404
 	server.use(function (req, res, next) {
-		res.render('error', {title: 'ошибка', status: 404, message: 'not found!'});
+		let auth;
+		if (req.session.user) {
+			auth = true;
+		} else {
+			auth = false;
+		}
+		res.render('error', {title: 'ошибка', status: 404, message: 'not found!', auth: auth});
 	});
 }
